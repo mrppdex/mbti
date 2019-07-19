@@ -100,13 +100,6 @@ class Mtbi:
 		  count = len(re.sub(regex, "", x))
 		  return element_ratio(x, count)
 
-		def capital_letters_ratio(x):
-		  regex = r"[^A-Z]"
-		  cap = re.sub(regex, "", x)
-		  if len(x) > 0:
-		    return float(len(cap)/len(x))
-		  return 0.0
-
 		def ellypsis_count(x):
 		  regex = r"\.\.\."
 		  count = len(re.findall(regex, x))
