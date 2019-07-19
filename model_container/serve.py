@@ -19,9 +19,10 @@ def infer():
     content = request.json
     if (not content['text']): abort(404)
     text = escape(content['text'])
-    mtbi = Mtbi(text, 'PJ')
+    mtbi = Mtbi(text, 'EI')
 
     mtbi.preprocess_pipeline()
     return jsonify(mtbi.predict())
 
-app.run(host='0.0.0.0', port=5000)
+port = os.environ.get('PORT', 30001)
+app.run(host='0.0.0.0', port=port)

@@ -7,30 +7,24 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: hello
-      what: backend
+      app: mtbi
   template:
     metadata:
       labels:
         app: mtbi
     spec:
       containers:
-      - name: backend
+      - name: "backend"
         image: mrppdex/mbti_backend
-        labels:
-          what: backend
         ports:
         - containerPort: 8080
-        - port: 80
-      - name: mbti_i
+      - name: "mbti-i"
         image: mrppdex/mbti_i
         ports:
-        - containerPort: 5000
-        - port: 30001
-      - name: mbti_i
+        - containerPort: 30001      
+      - name: "mbti-n"
         image: mrppdex/mbti_n
         ports:
-        - containerPort: 5000
-        - port: 30002
+        - containerPort: 30002
 
       
