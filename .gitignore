@@ -1,4 +1,6 @@
 *.csv
 *.pkl
 *.h5
+node_modules/
+.vscode/
 
