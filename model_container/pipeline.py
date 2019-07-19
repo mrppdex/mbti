@@ -1,7 +1,7 @@
-from keras.preprocessing.text import Tokenizer
-#from keras.preprocessing.sequence import pad_sequences
-from keras.models import load_model
-from keras.backend import clear_session
+from tensorflow.keras.preprocessing.text import Tokenizer
+#from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
+from tensorflow.keras.backend import clear_session
 
 #import pandas as pd
 import numpy as np
@@ -24,9 +24,6 @@ import pickle
 
 MAX_NUM_WORDS = 20000
 MAX_SEQUENCE_LENGTH = 1500
-
-sample_text = "hi all. i'm an extrovert and I don't like to be pushed around"
-
 
 class Mtbi:
 	def __init__(self, text, types):
@@ -182,5 +179,3 @@ class Mtbi:
       'type': self.types[int(pred<=0.5)],
       'prediction': max(pred, 1-pred) }
 		
-#mtbi_obj = mtbi_inference(sample_text, types=["Introvert", "Extrovert"])
-#mtbi_obj.predict()

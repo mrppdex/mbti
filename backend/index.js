@@ -16,18 +16,6 @@ const port = process.env.BE_PORT || 8080;
 //promise_j = axios.post('http://localhost:30004/', data);
 
 
-function aggPredictions(predictions, res) {
-    console.log('aggPredictions')
-    console.log(`${predictions}`);
-    let preds = [];
-    predictions.forEach((item, index) => {
-        preds.push(item.data);
-    });
-
-    res.send(preds);
-    console.log(preds);
-}
-
 app.post('/', (req, res) => {
     var schema = {
         text: Joi.string().min(10).required(),
