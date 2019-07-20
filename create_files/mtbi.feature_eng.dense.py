@@ -32,10 +32,10 @@ import pickle
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('personality', choices=['I', 'N', 'T', 'J'])
+parser.add_argument('personality', choices=['EI', 'SN', 'FT', 'PJ'])
 args = parser.parse_args()
 
-personality = args.personality
+personality = args.personality[1]
 
 df = pd.read_csv("mtbi_augmented_bert_512.csv")
 
