@@ -23,22 +23,22 @@ spec:
         - name: "NODE_ENV"
           value: "production"  
       - name: "mbti-i"
-        image: mrppdex/mbti_i
+        image: mrppdex/mbti_ei
         env:
         - name: "PORT"
           value: "30001"   
       - name: "mbti-n"
-        image: mrppdex/mbti_n
+        image: mrppdex/mbti_sn
         env:
         - name: "PORT"
           value: "30002"
       - name: "mbti-t"
-        image: mrppdex/mbti_t
+        image: mrppdex/mbti_ft
         env:
         - name: "PORT"
           value: "30003"
       - name: "mbti-j"
-        image: mrppdex/mbti_j
+        image: mrppdex/mbti_pj
         env:
         - name: "PORT"
           value: "30004"
