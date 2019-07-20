@@ -10,4 +10,6 @@ fi
 export PORT=$1
 export DICHOTOMY=$2
 
-docker build --tag=mrppdex/mbti_$DICHOTOMY .
+docker_tag=$(echo "mrppdex/mbti_$DICHOTOMY" | awk '{print tolower($0)}')
+
+docker build --tag=$docker_tag .
