@@ -14,17 +14,30 @@ spec:
         app: mtbi
     spec:
       containers:
-      - name: "backend"
+      - name: "nodejs-backend"
         image: mrppdex/mbti_backend
         ports:
-        - containerPort: 8080
+        - containerPort: 33333
       - name: "mbti-i"
         image: mrppdex/mbti_i
-        ports:
-        - containerPort: 30001      
+        env:
+        - name: "PORT"
+          value: "30001"     
       - name: "mbti-n"
         image: mrppdex/mbti_n
-        ports:
-        - containerPort: 30002
+        env:
+        - name: "PORT"
+          value: "30002"
+      - name: "mbti-t"
+        image: mrppdex/mbti_t
+        env:
+        - name: "PORT"
+          value: "30003"
+      - name: "mbti-j"
+        image: mrppdex/mbti_j
+        env:
+        - name: "PORT"
+          value: "30004"
+          
 
       

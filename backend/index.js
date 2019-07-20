@@ -15,8 +15,8 @@ const port = process.env.BE_PORT || 8080;
 //promise_t = axios.post('http://localhost:30003/', data);
 //promise_j = axios.post('http://localhost:30004/', data);
 
-app.get('/', (req, res) => {
-    res.status(200).send("Server up and running...");
+app.get('/health', (req, res) => {
+    res.status(200).send(JSON.stringify("Server up and running..."));
 });
 
 app.post('/', (req, res) => {
@@ -53,11 +53,11 @@ app.post('/', (req, res) => {
     //promise_i.then(result => res.send(result)).catch(error => console.log(error));
 
     Promise.all([promise_i, promise_n])
-       .then(result => res.send(result))
+       .then(result => res.status(200).send(result))
        .catch(new Error('Cos sie stalo...'));
 });
- 
-app.listen(port, 'localhost', () => {
+
+app.listen(port, '0.0.0.0', () => {
     console.log(`Listening on port ${port}...`);
 });
 

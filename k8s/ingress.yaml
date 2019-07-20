@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mbti-ingress
+spec:
+  backend:
+    serviceName: mbti-service
+    servicePort: 8080
