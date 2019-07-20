@@ -12,5 +12,5 @@ then
 fi
 
 echo "args are missing"
-echo "Usage: ./make.sh [ EI | SN | FT | PJ ]"
-echo "e.g. ./make.sh EI"
+echo "Usage: ./make.sh [ EI | SN | FT | PJ ] [model data dir]"
+echo "e.g. ./make.sh EI /mnt/c/mbti_docker/model_container/data"
