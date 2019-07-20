@@ -65,8 +65,8 @@ app.post('/', (req, res) => {
 
     var promise_i = rp(options_i);
     var promise_n = rp(options_n);
-    var promise_t = rp(options_t);
-    var promise_j = rp(options_j);
+    //var promise_t = rp(options_t);
+    //var promise_j = rp(options_j);
 
     //console.log(`${options}`);
 

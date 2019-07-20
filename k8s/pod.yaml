@@ -5,6 +5,7 @@ metadata:
   labels:
     app: mbti
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: mbti
@@ -18,11 +19,14 @@ spec:
         image: mrppdex/mbti_backend
         ports:
         - containerPort: 33333
+        env:
+        - name: "NODE_ENV"
+          value: "production"  
       - name: "mbti-i"
         image: mrppdex/mbti_i
         env:
         - name: "PORT"
-          value: "30001"     
+          value: "30001"   
       - name: "mbti-n"
         image: mrppdex/mbti_n
         env:
