@@ -1,7 +1,7 @@
-from tensorflow.keras.preprocessing.text import Tokenizer
-#from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import load_model
-from tensorflow.keras.backend import clear_session
+from keras.preprocessing.text import Tokenizer
+#from keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
+from keras.backend import clear_session
 
 #import pandas as pd
 import numpy as np

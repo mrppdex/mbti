@@ -15,6 +15,9 @@ const port = process.env.BE_PORT || 8080;
 //promise_t = axios.post('http://localhost:30003/', data);
 //promise_j = axios.post('http://localhost:30004/', data);
 
+app.get('/', (req, res) => {
+    res.status(200).send("Server up and running...");
+});
 
 app.post('/', (req, res) => {
     var schema = {
