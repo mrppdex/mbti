@@ -169,10 +169,10 @@ class Mtbi:
 		return scaled_dense_features
 
 	def predict(self):
-		print("Prediction step: ")
+		#print("Prediction step: ")
 		feature = self.preprocess_pipeline()
-		print(feature.shape)
-		print(feature)
+		#print(feature.shape)
+		#print(feature)
 		pred = float(self.model.predict(feature))
 		#print(f"You are {max(pred, 1-pred)*100:.2f} {self.types[int(pred<=0.5)]}...")
 		return { 
