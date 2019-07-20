@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE ${PORT}
-CMD ["python", "serve.py"]
+CMD ["python", "waitress_server.py"]

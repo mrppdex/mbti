@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Usage: ./make.sh [ EI | SN | FT | PJ ] <model data dir>"
+echo "[] - REQUIRED, <> - OPTIONAL"
+
 DATA_DIR=${2}
 DATA_DIR=${DATA_DIR:='../model_container/data/'}
 if [[ -d ${DATA_DIR} ]]
@@ -15,5 +18,3 @@ then
 fi
 
 echo "args are missing"
-echo "Usage: ./make.sh [ EI | SN | FT | PJ ] <model data dir>"
-echo "[] - REQUIRED, <> - OPTIONAL"
