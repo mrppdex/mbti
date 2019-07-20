@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtbiapp
+  name: mbtiapp
   labels:
-    app: mtbi
+    app: mbti
 spec:
   selector:
     matchLabels:
-      app: mtbi
+      app: mbti
   template:
     metadata:
       labels:
-        app: mtbi
+        app: mbti
     spec:
       containers:
       - name: "nodejs-backend"
@@ -38,6 +38,6 @@ spec:
         env:
         - name: "PORT"
           value: "30004"
-          
+
 
       

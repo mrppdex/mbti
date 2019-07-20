@@ -35,8 +35,6 @@ app.post('/', (req, res) => {
         json: true,
     };
 
-    var promise_i = rp(options_i);
-
     var options_n = {
         method: 'POST',
         uri: 'http://localhost:30002',
@@ -46,13 +44,35 @@ app.post('/', (req, res) => {
         json: true,
     };
 
+    var options_t = {
+        method: 'POST',
+        uri: 'http://localhost:30003',
+        body: {
+            text: `${req.body.text}`
+        },
+        json: true,
+    };
+
+    var options_j = {
+        method: 'POST',
+        uri: 'http://localhost:30004',
+        body: {
+            text: `${req.body.text}`
+        },
+        json: true,
+    };
+
+
+    var promise_i = rp(options_i);
     var promise_n = rp(options_n);
+    var promise_t = rp(options_t);
+    var promise_j = rp(options_j);
 
     //console.log(`${options}`);
 
     //promise_i.then(result => res.send(result)).catch(error => console.log(error));
 
-    Promise.all([promise_i, promise_n])
+    Promise.all([promise_i, promise_n, promise_t, promise_j])
        .then(result => res.status(200).send(result))
        .catch(new Error('Cos sie stalo...'));
 });
