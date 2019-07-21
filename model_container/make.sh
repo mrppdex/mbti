@@ -1,6 +1,5 @@
 #!/bin/bash
-if ([ -z $1 ] || [ -z $2 ])
-then
+if [[ -z $2 ]]; then
     echo "args are missing"
     echo "Usage: ./make.sh [PORT] [DICHOTOMY]"
     echo "e.g. ./make.sh 30001 EI"

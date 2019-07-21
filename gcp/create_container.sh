@@ -1,0 +1,1 @@
+gcloud container clusters create --machine-type=n1-standard-2 mbti-cluster --region=europe-west2
