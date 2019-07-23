@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+            html {
+                margin: 5vw;
+            }
+
+            textarea {
+                width: 100%;
+                -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+                -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+                box-sizing: border-box;         /* Opera/IE 8+ */
+            }
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            </style>
+</head>
+<body>
+    <div id="header"><h5>Enter a text (wait a while for the analysis...):</h5></div>
+    <form name="form" action="javascript:void(0);" method="POST">
+        <textarea name="text" id="formTextArea" rows=10></textarea>
+        <input id="formSubmit" type="submit" onclick="sendPost()">
+    </form>
+
+    <div class="output">
+        <table id="outputTable">
+            <tr>
+                <th>Treat</th>
+                <th>Prediction</th>
+            </tr>
+            <tr>
+                <td id="treat0"></td>
+                <td id="pred0"></td>
+            </tr>
+            <tr>
+                <td id="treat1"></td>
+                <td id="pred1"></td>
+            </tr>
+            <tr>
+                <td id="treat2"></td>
+                <td id="pred2"></td>
+            </tr>
+            <tr>
+                <td id="treat3"></td>
+                <td id="pred3"></td>
+            </tr>
+
+            
+        </table>
+    </div>
+
+    <script>
+        console.log('start...');
+        function sendPost() {
+            $("#formSubmit").hide()
+            var xhr = new XMLHttpRequest();
+            //var url = "http://127.0.0.1:33333/";
+            var url = "http://35.197.223.13:8080/";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            var data = JSON.stringify({"text": document.forms["form"].elements["text"].value});
+            xhr.send(data);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var msg = JSON.parse(xhr.responseText);
+                    //document.getElementById("output").innerHTML = JSON.stringify(json);
+                    // Try edit msg
+                    console.log(msg)
+                    
+                    msg.forEach(getInfo)
+
+                    function getInfo(item, index) {
+                        var personalities = { E: "Extravert", 
+                                              I: "Intorvert",
+                                              S: "Sensing",
+                                              F: "Feelling",
+                                              T: "Thinking",
+                                              J: "Juging",
+                                              P: "Perciving"
+                                            };
+                                            
+                        mbti_type = personalities[item.type];
+                        mbti_pred = parseInt(parseFloat(item.prediction)*100);
+                        //mbti_text = `<div>${mbti_type}: ${mbti_pred}%</div>`;
+                        //console.log(mbti_text);
+                        $(`#treat${index}`).html(mbti_type);
+                        $(`#pred${index}`).html(`${mbti_pred}%`);
+                        
+                    }
+
+                    //$('#msg').html(msg + icon)
+                    $("#formSubmit").show()
+                    console.log(msg);
+                }
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

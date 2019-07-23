@@ -5,6 +5,7 @@ const util = require('util');
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 
 const port = process.env.BE_PORT || 8080;
 
@@ -65,12 +66,14 @@ app.post('/', (req, res) => {
 
     var promise_i = rp(options_i);
     var promise_n = rp(options_n);
-    //var promise_t = rp(options_t);
-    //var promise_j = rp(options_j);
+    var promise_t = rp(options_t);
+    var promise_j = rp(options_j);
 
     //console.log(`${options}`);
 
     //promise_i.then(result => res.send(result)).catch(error => console.log(error));
+
+    res.set('Access-Control-Allow-Origin', '*');
 
     Promise.all([promise_i, promise_n, promise_t, promise_j])
        .then(result => res.status(200).send(result))
