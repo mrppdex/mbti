@@ -5,6 +5,7 @@
     <style>
             html {
                 margin: 5vw;
+                font-family: arial, sans-serif;
             }
 
             textarea {
@@ -13,16 +14,27 @@
                 -moz-box-sizing: border-box;    /* Firefox, other Gecko */
                 box-sizing: border-box;         /* Opera/IE 8+ */
             }
+
             table {
-              font-family: arial, sans-serif;
               border-collapse: collapse;
               width: 100%;
             }
-            
+
             td, th {
               border: 1px solid #dddddd;
               text-align: left;
               padding: 8px;
+            }
+
+            table.ptypeTable {
+                border-collapse: collapse;
+            }
+            
+            td.typePtype {
+                border: none;
+            }
+            td.explanationPtype {
+                border: none;
             }
             
             tr:nth-child(even) {
@@ -33,14 +45,23 @@
 <body>
     <div id="header"><h5>Enter a text (wait a while for the analysis...):</h5></div>
     <form name="form" action="javascript:void(0);" method="POST">
-        <textarea name="text" id="formTextArea" rows=10></textarea>
+        <textarea name="text" id="formTextArea" rows=10>
+The man who promises everything is sure to fulfil nothing, and everyone who promises too much is in danger of using evil means in order to carry out his promises, and is already on the road to perdition. Carl Jung.
+        </textarea>
         <input id="formSubmit" type="submit" onclick="sendPost()">
     </form>
-
+    <div class="ptype">
+        <table id="ptypeTable">
+            <tr>
+                <td id="typePtype"></td>
+                <td id="explanationPtype"></td>
+            </tr>
+        </table>
+    </div>
     <div class="output">
         <table id="outputTable">
             <tr>
-                <th>Treat</th>
+                <th>Characteristic</th>
                 <th>Prediction</th>
             </tr>
             <tr>
@@ -66,6 +87,27 @@
 
     <script>
         console.log('start...');
+        $("#ptypeTable").hide()
+        var typeExplained = {
+                            IJST: "Responsible, sincere, analytical, reserved, realistic, systematic. Hardworking and trustworthy with sound practical judgment.",
+                            FIJS: "Warm, considerate, gentle, responsible, pragmatic, thorough. Devoted caretakers who enjoy being helpful to others.",
+                            FIJN: "Idealistic, organized, insightful, dependable, compassionate, gentle. Seek harmony and cooperation, enjoy intellectual stimulation.",
+                            IJNT: "Innovative, independent, strategic, logical, reserved, insightful. Driven by their own original ideas to achieve improvements.",
+                            IPST: "Action-oriented, logical, analytical spontaneous, reserved, independent. Enjoy adventure, skilled at understanding how mechanical things work.",
+                            FIPS: "Gentle, sensitive, nurturing, helpful, flexible, realistic. Seek to crate a personal environment that is both beautiful and practical.",
+                            FINP: "Sensitive, creative, Idealistic, perceptive, caring, loyal. Value inner harmony and personal growth, focus on dreams and possibilities.",
+                            INPT: "Intellectual, logical, precise, reserved, flexible, imaginative. Original thinkers who enjoy speculation and crative problem solving.",
+                            EPST: "Outgoing, realistic, action-oriented, curious, versatile, spontaneous. Pragmatic problem solvers and skillful negotiators.",
+                            EFPS: "Playful, enthusiastic, friendly, spontaneous, tactful, flexible. Have strong common sense, enjoy helping people in tangible ways.",
+                            EFNP: "Enthusiastic, creative, spontaneous, optimistic, supportive, playful. Value inspiration, enjoy starting new projects, see potential in others.",
+                            ENTP: "Inventive, enthusiastic, strategic, enterprising, inquisitive, versatile. Enjoy new ideas and challenges, value inspiration.",
+                            EJST: "Efficient, outgoing, analytical, systematic, dependable, realistic. Like to run the show and get things done in an orderly fashion.",
+                            EFJS: "Friendly, outgoing, reliable, conscientious, organized, practical. Seek to be helpful and please others, enjoy being active and productive.",
+                            EFJN: "Caring, enthusiastic, idealistic, organized, diplomatic, responsible. Skilled communicators who value connection with people.",
+                            EJNT: "Strategic, logical, efficient, outhoing, ambitious, independent. Effective organizers of people and long-range planners."
+                    };
+
+
         function sendPost() {
             $("#formSubmit").hide()
             var xhr = new XMLHttpRequest();
@@ -77,6 +119,7 @@
             var data = JSON.stringify({"text": document.forms["form"].elements["text"].value});
             xhr.send(data);
 
+
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var msg = JSON.parse(xhr.responseText);
@@ -84,26 +127,33 @@
                     // Try edit msg
                     console.log(msg)
                     
+                    var personality = "";
                     msg.forEach(getInfo)
-
+                    
                     function getInfo(item, index) {
-                        var personalities = { E: "Extravert", 
-                                              I: "Intorvert",
+                        var personalities = { E: "Extraversion", 
+                                              I: "Introversion",
                                               S: "Sensing",
+                                              N: "Intuition",
                                               F: "Feelling",
                                               T: "Thinking",
-                                              J: "Juging",
-                                              P: "Perciving"
+                                              J: "Judging",
+                                              P: "Perceiving"
                                             };
-                                            
+                        personality += item.type;                   
                         mbti_type = personalities[item.type];
                         mbti_pred = parseInt(parseFloat(item.prediction)*100);
                         //mbti_text = `<div>${mbti_type}: ${mbti_pred}%</div>`;
                         //console.log(mbti_text);
                         $(`#treat${index}`).html(mbti_type);
-                        $(`#pred${index}`).html(`${mbti_pred}%`);
-                        
+                        $(`#pred${index}`).html(`${mbti_pred}%`);    
                     }
+
+                    $("#typePtype").html(`<b>${personality}</b>`);
+                    var explanationKey = personality.split('').sort().join('');
+                    $("#explanationPtype").html(`${typeExplained[explanationKey]}`);
+                    $("#ptypeTable").show();
+                    //console.log(`explanationKey: ${explanationKey}`);
 
                     //$('#msg').html(msg + icon)
                     $("#formSubmit").show()
