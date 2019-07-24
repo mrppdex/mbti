@@ -11,4 +11,5 @@ export DICHOTOMY=$2
 
 docker_tag=$(echo "mrppdex/mbti_$DICHOTOMY" | awk '{print tolower($0)}')
 
-docker build --tag=$docker_tag .
+docker build --tag=${docker_tag} .
+docker push ${docker_tag}
