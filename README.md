@@ -1,5 +1,9 @@
 # Myers-Briggs Personality Type Predictor
 
+[Stakeholder's Presentation](https://www.youtube.com/watch?v=pO6Y96KzKdk)
+
+[Peer's (Data Scientists) Presentation](https://www.youtube.com/watch?v=SJoLF-NjLIk)
+
 In this project we are predicting Myers-Briggs personality type based on a provided text. 
 
 It consists of 4 binary classifiers predicting 4 different pairs of Dichotomies (e.g Introversion-Extraversion). Every classifier runs on a separate container and is connected to the outside of the kubernetes pod through the backend.
